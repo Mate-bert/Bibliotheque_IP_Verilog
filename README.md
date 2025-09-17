@@ -43,17 +43,23 @@ Le module `pipeline` est un élément de synchronisation basique qui introduit u
 ## 🚀 Buffered FIFO
 
 ### Description
-La `Buffered FIFO` est une FIFO sophistiquée qui combine deux types de FIFO pour optimiser les performances et la gestion de la mémoire :
+La `Buffered FIFO` est une FIFO sophistiquée qui utilise une architecture à deux niveaux pour optimiser les performances en gérant intelligemment la latence de lecture :
 
-1. **FIFO à registres** (`FIFO_registers.v`) - Pour les données fréquemment accédées
-2. **FIFO à mémoire BSRAM** (`FIFO_BSRAM.v`) - Pour le stockage de grandes quantités de données
+1. **FIFO à registres** (`FIFO_registers.v`) - Cache rapide pour accès immédiat aux données
+2. **FIFO à mémoire BSRAM** (`FIFO_BSRAM.v`) - Stockage principal avec latence de lecture
 
 ### Architecture
 ```
 Données d'entrée → FIFO_registers → FIFO_BSRAM → Données de sortie
                       ↑                ↑
-                   Cache rapide    Stockage principal
+                   Accès immédiat    Latence de lecture
+                   (0 cycle)         (plusieurs cycles)
 ```
+
+### Principe de fonctionnement
+- **Cache FIFO_registers** : Permet un accès immédiat (0 cycle de latence) aux données les plus récentes
+- **FIFO_BSRAM** : Stockage principal optimisé pour la capacité, mais avec une latence de lecture inhérente
+- **Avantage** : Le cache évite d'avoir à attendre la latence de lecture de la BSRAM pour les données fréquemment accédées
 
 ### Composants
 - `Buffered_FIFO.v` - Module principal de contrôle
@@ -70,10 +76,11 @@ Données d'entrée → FIFO_registers → FIFO_BSRAM → Données de sortie
 - ✅ Gestion des débordements et sous-débordements
 
 ### Avantages
-- **Performance** : Accès rapide aux données récentes via les registres
+- **Performance** : Accès immédiat (0 cycle) aux données via le cache registres
+- **Évitement de latence** : Le cache évite la latence de lecture de la BSRAM
 - **Capacité** : Stockage de grandes quantités via la mémoire BSRAM
-- **Flexibilité** : Adaptation automatique selon la charge de données
-- **Fiabilité** : Contrôle de flux robuste
+- **Optimisation** : Meilleur compromis entre vitesse d'accès et capacité de stockage
+- **Fiabilité** : Contrôle de flux robuste avec système de crédits
 
 ---
 
@@ -155,7 +162,7 @@ Buffered_FIFO #(
 
 ## 👨‍💻 Auteur
 
-**Mate-bert** - Développeur FPGA
+**Mateo Bertolelli** - Développeur FPGA
 
 ---
 
