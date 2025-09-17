@@ -1,0 +1,51 @@
+# Fichiers temporaires et de compilation
+*.tmp
+*.temp
+*.log
+*.out
+*.o
+*.obj
+
+# Fichiers de synthèse FPGA
+*.rpt
+*.sdf
+*.sdc
+*.qws
+*.qsf.bak
+*.qpf.bak
+
+# Répertoires de build
+build/
+output/
+simulation/
+synthesis/
+
+# Fichiers de simulation
+*.vcd
+*.wlf
+*.fst
+
+# Fichiers spécifiques aux outils FPGA
+*.qpf
+*.qsf
+*.qws
+*.sopcinfo
+*.sof
+*.pof
+*.rbf
+
+# Fichiers de configuration des outils
+*.ini
+*.cfg
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Fichiers de sauvegarde
+*.bak
+*.backup
+*~
