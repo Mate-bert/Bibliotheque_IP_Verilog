@@ -58,8 +58,8 @@ Données d'entrée → FIFO_registers → FIFO_BSRAM → Données de sortie
 
 ### Principe de fonctionnement
 - **Cache FIFO_registers** : Permet un accès immédiat (0 cycle de latence) aux données les plus récentes
-- **FIFO_BSRAM** : Stockage principal optimisé pour la capacité, mais avec une latence de lecture inhérente
-- **Avantage** : Le cache évite d'avoir à attendre la latence de lecture de la BSRAM pour les données fréquemment accédées
+- **FIFO_BSRAM** : Stockage principal optimisé pour la capacité, mais avec une latence de lecture inhérente à l'utilisation de mémoire matérielle
+- **Avantage** : Le cache évite d'avoir à attendre la latence de lecture de la BSRAM pour les 1ère données arrivés
 
 ### Composants
 - `Buffered_FIFO.v` - Module principal de contrôle
